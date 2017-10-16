@@ -14,7 +14,9 @@ export default async function index(ctx) {
         return records;
     });
     const body = await render("index", { 
-        records,
+        records: records.map((item)=>{
+            return {...item, date: moment(item['timestamp']).format("DD/MM/YYYY HH:mm:ss")};
+        }),
         startDate: moment(records[0]['timestamp']).format("DD/MM/YYYY HH:mm:ss"),
         endDate: moment(records[records.length-1]['timestamp']).format("DD/MM/YYYY HH:mm:ss"),
         recordsJSON:JSON.stringify(records),

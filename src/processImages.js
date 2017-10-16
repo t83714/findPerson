@@ -79,9 +79,9 @@ const getTotalImageNum = async function () {
     return totalNum;
 };
 
-const updateImageHasPersonStatus = async function (id, hasPerson) {
-    const sql="UPDATE `images` SET `has_person` = ?, `result_update_time` = UNIX_TIMESTAMP() WHERE `images`.`id` = ?;";
-    const params=[hasPerson?1:0,id];
+const updateImageHasPersonStatus = async function (id, hasPerson, data) {
+    const sql="UPDATE `images` SET `has_person` = ?, `result_update_time` = UNIX_TIMESTAMP(), `confidence`=?, `data`=? WHERE `images`.`id` = ?;";
+    const params=[hasPerson?1:0,data.confidence,JSON.stringify(data),id];
     const result = await db.execute(sql, params).spread((result) => {
         return result;
     });
@@ -96,10 +96,11 @@ const queryImageProcessingResult = async function (allDbImages) {
             let result = await getFindPersonResultForJobId(allDbImages[i]['jobId']);
             allDbImages[i]['result']={
                 processed: result.status.code=='COMPLETED_SUCCESSFULLY'?true:false,
-                hasPerson: result.results[0].hasPerson
+                hasPerson: result.results[0].hasPerson,
+                data: result.results[0]
             };
             if(allDbImages[i]['result']['processed'] || allDbImages[i]['result']['hasPerson']){
-                await updateImageHasPersonStatus(allDbImages[i]['id'],allDbImages[i]['result']['hasPerson']);
+                await updateImageHasPersonStatus(allDbImages[i]['id'],allDbImages[i]['result']['hasPerson'],allDbImages[i]['result']['data']);
             }
         }
     }catch(e){
@@ -135,7 +136,7 @@ const getResult = async function () {
     }*/
 
     try{
-        allDbImages = await db.execute("SELECT * FROM images WHERE `result_update_time`=0").spread((records) => {
+        allDbImages = await db.execute("SELECT * FROM images WHERE `result_update_time`=0 LIMIT 50").spread((records) => {
             return records;
         });
     }catch(e){
