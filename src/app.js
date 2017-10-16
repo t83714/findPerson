@@ -16,7 +16,6 @@ const app = new Koa();
 app.use(logger());
 
 app.use(route.get("/", index));
-app.use(route.get("/:id", index));
 
 // Serve static files
 app.use(instantTheme.serve);

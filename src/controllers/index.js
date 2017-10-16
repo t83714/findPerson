@@ -8,12 +8,10 @@ const render = views(path.resolve(__dirname, "../views"), {
     map: { html: "ejs" },
 });
 
-export default async function index(ctx, id) {
-    if (!id) id = 0;
-    const records = await db.execute("SELECT * FROM parking_zones LIMIT ?,50", [id]).spread((records) => {
+export default async function index(ctx) {
+    const records = await db.execute("SELECT * FROM images ORDER BY timestamp ASC").spread((records) => {
         return records;
     });
-
-    const body = await render("index", { records });
+    const body = await render("index", { records, recordsJSON:JSON.stringify(records) });
     ctx.body = instantTheme.header + body + instantTheme.footer;
 }
