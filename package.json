@@ -47,6 +47,7 @@
     "mysql2-promise": "^0.1.4",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
+    "sleep-promise": "^2.0.0",
     "uuid": "^3.1.0"
   },
   "@std/esm": {

@@ -50,6 +50,51 @@ export const requestFindPersonForJobId = async function (items, jobId) {
 };
 
 
+export const requestOneImageFindPersonForJobId = async function (image, jobId) {
+    const sessionToken = await requestAuth();
+    const defaultOptions = {
+        model: "CLASSIFIER_GEN_01",
+        tolerance: "HIGH",
+        items: [{
+            url:image['url'],
+            customId:`${jobId}+${image['id']}`
+        }],
+    };
+
+    const options = {
+        method : "POST",
+        uri : apiUri + "/find-person",
+        body : defaultOptions,
+        headers: {
+            Authorization: `Bearer ${sessionToken}`,
+        },
+        json: true
+    };
+    return rp(options)
+    .then((result) => {
+        return result.id;
+    });
+};
+
+
+export const getFindPersonResultForJobId = async function (jobId) {
+    const sessionToken = await requestAuth();
+    const options = {
+        method : "GET",
+        uri : apiUri + `/find-person/${jobId}`,
+        headers: {
+            Authorization: `Bearer ${sessionToken}`,
+        },
+        json: true
+    };
+    return rp(options)
+    .then((result) => {
+        return result;
+    });
+};
+
+
+
 
 
 
