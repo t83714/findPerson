@@ -1,0 +1,35 @@
+{
+    "env": {
+        "es6": true,
+        "browser": true,
+        "mocha": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended","airbnb"],
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "max-len": [1, 120, 2, {"ignoreComments": true}],
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "import/prefer-default-export": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "func-names": "off",
+        "no-param-reassign": 0
+    }
+}

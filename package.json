@@ -1,0 +1,56 @@
+{
+  "name": "findpersonemo",
+  "version": "1.0.0",
+  "description": "findpersonemo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -r @std/esm index.js",
+    "processImages": "node -r @std/esm ./src/processImages.js",
+    "test": "mocha -r @std/esm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/t83714/findPerson.git"
+  },
+  "engines": {
+    "node": ">=8.4.0"
+  },
+  "author": "Jacky Jiang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/t83714/findPerson/issues"
+  },
+  "homepage": "https://github.com/t83714/findPerson#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^16.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "mocha": "^4.0.1"
+  },
+  "dependencies": {
+    "@std/esm": "^0.11.3",
+    "chalk": "^2.1.0",
+    "co-body": "^5.1.1",
+    "co-views": "^2.1.0",
+    "ejs": "^2.5.7",
+    "koa": "^2.3.0",
+    "koa-compress": "^2.0.0",
+    "koa-instant-theme": "^1.0.0",
+    "koa-logger": "^3.1.0",
+    "koa-route": "^3.2.0",
+    "koa-static": "^4.0.1",
+    "moment": "^2.19.1",
+    "mysql2": "^1.4.2",
+    "mysql2-promise": "^0.1.4",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "uuid": "^3.1.0"
+  },
+  "@std/esm": {
+    "esm": "all",
+    "cjs": true
+  }
+}
