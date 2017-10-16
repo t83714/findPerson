@@ -129,14 +129,8 @@ const getResult = async function () {
     let totalImageNum = await getTotalImageNum();
     let allDbImages;
 
-    /*for(let i=0; i < totalImageNum;){
-        let batchImages = db.execute(`SELECT * FROM images LIMIT ${i},`).spread((records) => {
-            return records;
-        });
-    }*/
-
     try{
-        allDbImages = await db.execute("SELECT * FROM images WHERE `result_update_time`=0 LIMIT 50").spread((records) => {
+        allDbImages = await db.execute("SELECT * FROM images WHERE `result_update_time`=0").spread((records) => {
             return records;
         });
     }catch(e){
@@ -157,7 +151,7 @@ const getResult = async function () {
     do{
         pendingItems = await queryImageProcessingResult(allDbImages);
         if(pendingItems){
-            await sleep(1000);
+            await sleep(500);
         }
     }while(pendingItems);
     
