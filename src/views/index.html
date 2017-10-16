@@ -7,7 +7,10 @@
 }
 
 </style>
-
+<script>
+var records=<%-recordsJSON%>;
+</script>
+</script>
 <script type="text/javascript">
 (function(){
     try{
@@ -26,6 +29,18 @@
 }
 .hasNoPerson {
     background-color:  green;
+}
+#content{
+    padding-top: 0px !important;
+}
+.wrapText{ 
+    /*width:5px;
+    display:table;*/
+    white-space: pre-wrap; /* css-3 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
  </style>
 
@@ -48,6 +63,7 @@
             data-image-timestamp="<%=records[i]['timestamp']%>"
             data-image-date="<%=records[i]['date']%>"
             data-image-confidence="<%=records[i]['confidence']%>"
+            data-image-key="<%=i%>"
         >
         </td>
         <% } %>
@@ -59,14 +75,24 @@ SystemManager(function(){
 	jQuery('.imgTd').qtip({
 	    content: {
 	        text: function(){
+
+                function text2html(str)
+                {
+                    return jQuery('<div></div>').text(str).html();
+                }
+
                 var imgUrl=jQuery(this).data('image-url');
                 var timestamp=jQuery(this).data('image-timestamp');
                 var date=jQuery(this).data('image-date');
                 var confidence=jQuery(this).data('image-confidence');
-                return '<b>Time Stamp: '+timestamp+'</b><br/>'+
+                var key=parseInt(jQuery(this).data('image-key'));
+                var data=records[key];
+                return '<table style="width:1000px; width:98%"><tr><td><b>Time Stamp: '+timestamp+'</b><br/>'+
                 '<b>Date Time: '+date+'</b><br/>'+
                 '<b>Confidence: '+confidence+'</b><br/>'+
-                '<img src="'+imgUrl+'">';
+                '<img src="'+imgUrl+'"></td>'+
+                '<td class="text-top" valign="top"><div class="well wrapText" style="max-width:300px">'+text2html(JSON.stringify(data))+'<div></td>'+
+                '</tr></table>';
             }
 	    },
 	    position: {
@@ -78,7 +104,7 @@ SystemManager(function(){
             delay: 1
         },
         style:{
-            width: "800px"
+            width: "1124px"
         }
 	});
 	
