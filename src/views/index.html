@@ -1,6 +1,12 @@
 <script type="text/javascript" src="qtip/jquery.qtip.min.js"></script>
-<link rel="stylesheet" type="text/css" href="qtip/jquery.qtip.min.css" />    
+<link rel="stylesheet" type="text/css" href="qtip/jquery.qtip.css" />    
 
+<style>
+.qtip{
+    maxWidth: 550px !important;
+}
+
+</style>
 
 <script type="text/javascript">
 (function(){
@@ -64,7 +70,10 @@ SystemManager(function(){
 	    show: {
             solo: '.imgTd',
             delay: 1
-	    }
+        },
+        style:{
+            width: "800px"
+        }
 	});
 	
 });
