@@ -39,6 +39,7 @@
             class="imgTd <%=records[i]['has_person']==1?'hasPerson':'hasNoPerson'%>"
             data-image-url="<%=records[i]['url']%>"
             data-image-id="<%=records[i]['id']%>"
+            data-image-timestamp="<%=records[i]['timestamp']%>"
         >
         </td>
         <% } %>
@@ -51,7 +52,9 @@ SystemManager(function(){
 	    content: {
 	        text: function(){
                 var imgUrl=jQuery(this).data('image-url');
-                return '<img src="'+imgUrl+'">';
+                var timestamp=jQuery(this).data('image-timestamp');
+                return '<b>Time Stamp: '+timestamp+'</b>'+
+                '<img src="'+imgUrl+'">';
             }
 	    },
 	    position: {
