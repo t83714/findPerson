@@ -13,7 +13,7 @@
 .barTable{
     width:100%;
     min-width:600px;
-    height:120px;
+    height:220px;
 }
 .hasPerson {
     background-color:  red;
@@ -22,8 +22,15 @@
     background-color:  green;
 }
  </style>
- 
- <table class="barTable">
+
+<div class="row">
+<table style="width:100%">
+    <tr>
+        <td><%=startDate%></td>
+        <td class="text-right"><%=endDate%></td>
+    </tr>
+</table>
+<table class="barTable">
     <tr>
         <% for(let i=0;i<records.length;i++){ %>
         <td 
@@ -37,7 +44,7 @@
         <% } %>
     </tr>
  </table>
- 
+ </div>
 <script type="text/javascript">
 SystemManager(function(){
 	jQuery('.imgTd').qtip({
